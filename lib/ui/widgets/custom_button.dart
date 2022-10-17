@@ -29,6 +29,7 @@ class CustomButton extends StatelessWidget {
           ),
         ),
         onPressed: onPressed,
+        // Widget: null,
         child: Text(
           title,
           style: whiteTextStyle.copyWith(
