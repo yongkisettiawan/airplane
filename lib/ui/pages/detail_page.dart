@@ -1,12 +1,16 @@
+import 'package:airplane/models/destination_model.dart';
 import 'package:airplane/ui/pages/choose_seat_page.dart';
 import 'package:airplane/ui/widgets/custom_button.dart';
 import 'package:airplane/ui/widgets/interest_item.dart';
 import 'package:airplane/ui/widgets/photo_item.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import '../../shared/theme.dart';
 
 class DetailPage extends StatelessWidget {
-  const DetailPage({Key? key}) : super(key: key);
+  final DestinationModel destination;
+
+  const DetailPage(this.destination, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +21,8 @@ class DetailPage extends StatelessWidget {
         decoration: BoxDecoration(
           image: DecorationImage(
             fit: BoxFit.cover,
-            image: AssetImage(
-              'assets/image_destination1.png',
+            image: NetworkImage(
+              destination.imageUrl,
             ),
           ),
         ),
@@ -29,7 +33,7 @@ class DetailPage extends StatelessWidget {
       return Container(
         height: 214,
         width: double.infinity,
-        margin: EdgeInsets.only(top: 236),
+        margin: const EdgeInsets.only(top: 236),
         decoration: BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.topCenter,
@@ -52,10 +56,10 @@ class DetailPage extends StatelessWidget {
           children: [
             //NOTE: EMBLEM
             Container(
-              margin: EdgeInsets.only(top: 30),
+              margin: const EdgeInsets.only(top: 30),
               width: 108,
               height: 24,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage(
                     'assets/icon_emblem.png',
@@ -66,7 +70,7 @@ class DetailPage extends StatelessWidget {
 
             //NOTE: TITLE
             Container(
-              margin: EdgeInsets.only(top: 256),
+              margin: const EdgeInsets.only(top: 256),
               child: Row(
                 children: [
                   Expanded(
@@ -74,7 +78,7 @@ class DetailPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Like Ciliwung',
+                          destination.name,
                           style: whiteTextStyle.copyWith(
                             fontSize: 24,
                             fontWeight: semibold,
@@ -82,7 +86,7 @@ class DetailPage extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                         ),
                         Text(
-                          'Tangerang',
+                          destination.city,
                           style: whiteTextStyle.copyWith(
                             fontSize: 16,
                             fontWeight: light,
@@ -98,10 +102,10 @@ class DetailPage extends StatelessWidget {
                       Container(
                         width: 24,
                         height: 20,
-                        margin: EdgeInsets.only(
+                        margin: const EdgeInsets.only(
                           right: 2,
                         ),
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           image: DecorationImage(
                             image: AssetImage(
                               'assets/icon_star.png',
@@ -110,7 +114,7 @@ class DetailPage extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '4.8',
+                        destination.rating.toString(),
                         style: whiteTextStyle.copyWith(
                           fontWeight: medium,
                         ),
@@ -123,8 +127,8 @@ class DetailPage extends StatelessWidget {
             //NOTE: DESCRIPTION
             Container(
               width: double.infinity,
-              margin: EdgeInsets.only(top: 30),
-              padding: EdgeInsets.symmetric(
+              margin: const EdgeInsets.only(top: 30),
+              padding: const EdgeInsets.symmetric(
                 horizontal: 20,
                 vertical: 30,
               ),
@@ -143,7 +147,7 @@ class DetailPage extends StatelessWidget {
                       fontWeight: semibold,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 6,
                   ),
                   Text(
@@ -153,7 +157,7 @@ class DetailPage extends StatelessWidget {
                     ),
                   ),
                   //NOTE:PHOTOS
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Text(
@@ -163,11 +167,11 @@ class DetailPage extends StatelessWidget {
                       fontWeight: semibold,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 6,
                   ),
                   Row(
-                    children: [
+                    children: const [
                       PhotoItem(
                         imgUrl: 'assets/image_photo1.png',
                       ),
@@ -180,7 +184,7 @@ class DetailPage extends StatelessWidget {
                     ],
                   ),
                   //NOTE:INTEREST
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Text(
@@ -190,11 +194,11 @@ class DetailPage extends StatelessWidget {
                       fontWeight: semibold,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 6,
                   ),
                   Row(
-                    children: [
+                    children: const [
                       InterestItem(
                         text: 'Kids Park',
                       ),
@@ -203,11 +207,11 @@ class DetailPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Row(
-                    children: [
+                    children: const [
                       InterestItem(
                         text: 'City Museum',
                       ),
@@ -222,7 +226,7 @@ class DetailPage extends StatelessWidget {
             //NOTE: PRICE AND BOOK BUTTON
             Container(
               width: double.infinity,
-              margin: EdgeInsets.symmetric(vertical: 30),
+              margin: const EdgeInsets.symmetric(vertical: 30),
               child: Row(
                 children: [
                   //NOTE: PRICE
@@ -231,13 +235,17 @@ class DetailPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'IDR 2.500.000',
+                          NumberFormat.currency(
+                            locale: 'id',
+                            symbol: 'IDR ',
+                            decimalDigits: 0,
+                          ).format(destination.price),
                           style: blackTextStyle.copyWith(
                             fontSize: 18,
                             fontWeight: medium,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 6,
                         ),
                         Text(
@@ -257,7 +265,7 @@ class DetailPage extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => ChooseSeatPage(),
+                          builder: (context) => const ChooseSeatPage(),
                         ),
                       );
                     },

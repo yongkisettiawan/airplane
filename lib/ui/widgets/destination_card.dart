@@ -18,7 +18,7 @@ class DestinationCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => DetailPage(),
+            builder: (context) => DetailPage(destination),
           ),
         );
       },
@@ -26,7 +26,7 @@ class DestinationCard extends StatelessWidget {
         height: 323,
         width: 200,
         margin: EdgeInsets.only(left: defaultMargin),
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(18),
           color: kWhiteColor,
@@ -37,7 +37,7 @@ class DestinationCard extends StatelessWidget {
             Container(
               height: 220,
               width: 180,
-              margin: EdgeInsets.only(bottom: 20),
+              margin: const EdgeInsets.only(bottom: 20),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(18),
                 image: DecorationImage(
