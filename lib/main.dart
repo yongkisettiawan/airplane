@@ -3,6 +3,7 @@ import 'package:airplane/cubit/destination_cubit.dart';
 import 'package:airplane/cubit/seat_cubit.dart';
 import 'package:airplane/cubit/transaction_cubit.dart';
 import 'package:airplane/ui/pages/sign_in_page.dart';
+import 'package:airplane/ui/pages/success_checkout_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -53,6 +54,7 @@ class MyApp extends StatelessWidget {
           '/sign-in': (context) => SignInPage(),
           '/bonus': (context) => const BonusPage(),
           '/main': (context) => const MainPage(),
+          '/success': (context) => const SuccessCheckoutPage(),
         },
       ),
     );
