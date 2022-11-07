@@ -23,4 +23,19 @@ class TransactionSevice {
       rethrow;
     }
   }
+
+  Future<List<TransactionModel>> fatchTransactions() async {
+    try {
+      QuerySnapshot result = await _transactionReference.get();
+
+      List<TransactionModel> transaction = result.docs.map((e) {
+        return TransactionModel.fromJson(
+            e.id, e.data() as Map<String, dynamic>);
+      }).toList();
+
+      return transaction;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }
