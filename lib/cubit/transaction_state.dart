@@ -26,5 +26,5 @@ class TransactionFiled extends TransactionState {
   const TransactionFiled(this.error);
 
   @override
-  List<Object> get props => super.props;
+  List<Object> get props => [error];
 }
