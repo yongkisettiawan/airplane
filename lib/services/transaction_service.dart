@@ -8,16 +8,14 @@ class TransactionSevice {
   Future<void> createTransaction(TransactionModel transaction) async {
     try {
       _transactionReference.add({
-        'destination': {
-          'destination': transaction.destination.toJson(),
-          'amountofTraveler': transaction.amountOfTraveler,
-          'selectedSeats': transaction.selectedSeat,
-          'insurance': transaction.insurance,
-          'refundable': transaction.refundable,
-          'vat': transaction.vat,
-          'price': transaction.price,
-          'grandTotal': transaction.grandTotal,
-        }
+        'destination': transaction.destination.toJson(),
+        'amountofTraveler': transaction.amountOfTraveler,
+        'selectedSeat': transaction.selectedSeat,
+        'insurance': transaction.insurance,
+        'refundable': transaction.refundable,
+        'vat': transaction.vat,
+        'price': transaction.price,
+        'grandTotal': transaction.grandTotal,
       });
     } catch (e) {
       rethrow;
@@ -28,12 +26,12 @@ class TransactionSevice {
     try {
       QuerySnapshot result = await _transactionReference.get();
 
-      List<TransactionModel> transaction = result.docs.map((e) {
+      List<TransactionModel> transactions = result.docs.map((e) {
         return TransactionModel.fromJson(
             e.id, e.data() as Map<String, dynamic>);
       }).toList();
 
-      return transaction;
+      return transactions;
     } catch (e) {
       rethrow;
     }

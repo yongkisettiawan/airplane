@@ -7,7 +7,7 @@ class TransactionPage extends StatefulWidget {
   const TransactionPage({Key? key}) : super(key: key);
 
   @override
-  State<TransactionPage> createState() => _TransactionPageState();
+  _TransactionPageState createState() => _TransactionPageState();
 }
 
 class _TransactionPageState extends State<TransactionPage> {
@@ -26,7 +26,8 @@ class _TransactionPageState extends State<TransactionPage> {
           return const Center(
             child: CircularProgressIndicator(),
           );
-        } else if (state is TransactionSuccess) {
+        }
+        if (state is TransactionSuccess) {
           if (state.transactions.isEmpty) {
             return const Center(
               child: Text('Kamu belum melakukan transaksi'),
@@ -42,7 +43,7 @@ class _TransactionPageState extends State<TransactionPage> {
           }
         }
         return const Center(
-          child: Text('Transaction Page'),
+          child: Text('Tarnsaction Page'),
         );
       },
     );
